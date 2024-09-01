@@ -28,7 +28,7 @@ const Page = () => {
   };
 
   return (
-    <div className="bg-[#ffe5d9] h-screen p-5 flex justify-center items-center">
+    <div className="bg-[#feede5] h-screen p-5 flex justify-center items-center">
       <div className="w-[45%] bg-[#f4acb7] rounded h-screen p-1 ">
         <Header />
         <div className="text-white text-xl font-semibold m-2 text-center bg-[#f5cac3] rounded ">
