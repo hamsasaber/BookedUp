@@ -1,7 +1,16 @@
-const { orderLines } = require("../../models");
+const { orderLines, customers, books } = require("../../models");
 
 const getAllOrderlines = async (req, res) => {
-  const list = await orderLines.findAll();
+  const list = await orderLines.findAll({
+    include: [
+      {
+        model: customers,
+      },
+      {
+        model: books,
+      },
+    ],
+  });
   res.json(list);
 };
 

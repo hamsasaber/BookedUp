@@ -1,7 +1,13 @@
-const { books } = require("../../models");
+const { books, authors, ratings } = require("../../models");
 
 const getAllBooks = async (req, res) => {
-  const allBooks = await books.findAll();
+  const allBooks = await books.findAll({
+    include: [
+      {
+        model: authors,
+      },
+    ],
+  });
   res.json(allBooks);
 };
 
@@ -22,6 +28,7 @@ const newBook = async (req, res) => {
     rentPrice: req.body.rentPrice,
     publishDate: req.body.publishDate,
     authorId: req.body.authorId,
+    status: req.body.status,
   });
   res.json(addBook);
 };
@@ -29,17 +36,16 @@ const newBook = async (req, res) => {
 const editBook = async (req, res) => {
   const editedBook = await books.update(
     {
-      title: req.body.title ?? "new Book",
-      description: req.body.description ?? "insert Description",
-      coverImage: req.files["coverImage"]
-        ? req.files["coverImage"][0].path
-        : "",
-      path: req.files["path"] ? req.files["path"][0].path : "",
+      title: req.body.title,
+      description: req.body.description,
+      coverImage: req.files["coverImage"][0].path,
+      path: req.files["path"][0].path,
       nbRead: req.body.nbRead,
-      genre: req.body.genre ?? "general",
+      genre: req.body.genre,
       salesPrice: req.body.salesPrice,
       rentPrice: req.body.rentPrice,
       publishDate: req.body.publishDate,
+      status: req.body.status,
       authorId: req.body.authorId,
     },
     {

@@ -1,7 +1,16 @@
-const { ratings } = require("../../models");
+const { ratings, customers, books } = require("../../models");
 
 const getAllRatings = async (req, res) => {
-  const allRatings = await ratings.findAll();
+  const allRatings = await ratings.findAll({
+    include: [
+      {
+        model: customers,
+      },
+      {
+        model: books,
+      },
+    ],
+  });
   res.json(allRatings);
 };
 
